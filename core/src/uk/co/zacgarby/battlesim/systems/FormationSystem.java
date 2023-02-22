@@ -2,7 +2,6 @@ package uk.co.zacgarby.battlesim.systems;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
-import uk.co.zacgarby.battlesim.Families;
 import uk.co.zacgarby.battlesim.components.FormationComponent;
 import uk.co.zacgarby.battlesim.components.GoalComponent;
 import uk.co.zacgarby.battlesim.formations.Formation;

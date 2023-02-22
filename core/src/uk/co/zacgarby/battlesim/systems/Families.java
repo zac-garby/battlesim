@@ -1,4 +1,4 @@
-package uk.co.zacgarby.battlesim;
+package uk.co.zacgarby.battlesim.systems;
 
 import com.badlogic.ashley.core.Family;
 import uk.co.zacgarby.battlesim.components.FormationComponent;

@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import uk.co.zacgarby.battlesim.components.*;
 import uk.co.zacgarby.battlesim.formations.Formation;
 import uk.co.zacgarby.battlesim.formations.RowsFormation;
+import uk.co.zacgarby.battlesim.physics.Circle;
 import uk.co.zacgarby.battlesim.systems.*;
 
 public class Battlesim extends ApplicationAdapter {
@@ -79,9 +80,10 @@ public class Battlesim extends ApplicationAdapter {
 				entity.add(new ShadowComponent(0.1f));
 
 				entity.add(new MovementComponent(rs));
+				entity.add(new CollisionComponent(new Circle(0.85f)));
 				entity.add(new PositionComponent(x + rx, y + ry));
 
-				entity.add(new GoalComponent(x + rx, y + ry + 4, 0.1f));
+				entity.add(new GoalComponent(x + rx, y + ry, 0.1f));
 				entity.add(new FormationComponent(formation, i++));
 
 				engine.addEntity(entity);
@@ -101,44 +103,11 @@ public class Battlesim extends ApplicationAdapter {
 				entity.add(new ShadowComponent(0.1f));
 
 				entity.add(new PositionComponent(x + rx, y + ry));
+				entity.add(new CollisionComponent(new Circle(0.85f)));
 				entity.add(new MovementComponent(rs));
 
 				engine.addEntity(entity);
 			}
-		}
-
-		for (int y = 6; y < 10; y++) {
-			for (int x = -30; x < 30; x++) {
-				Entity entity = new Entity();
-
-				float rx = (float) (Math.random() - 0.5) * 0.2f;
-				float ry = (float) (Math.random() - 0.5) * 0.2f;
-				float rs = (float) (Math.random() - 0.5) * 0.05f + 1f;
-
-				entity.add(new SpriteComponent(round));
-				entity.add(new TeamMaskComponent(roundMask, new Color(239f / 255f, 212f / 255f, 53f / 255f, 1f)));
-				entity.add(new PositionComponent(x + rx, y + ry));
-				entity.add(new MovementComponent(rs));
-				entity.add(new ShadowComponent(0.1f));
-
-				engine.addEntity(entity);
-			}
-		}
-
-		for (int x = -30; x < 30; x += 5) {
-			Entity entity = new Entity();
-
-			float rx = (float) (Math.random() - 0.5) * 0.35f;
-			float ry = (float) (Math.random() - 0.5) * 0.35f;
-			float rs = (float) (Math.random() - 0.5) * 0.05f + 1f;
-
-			entity.add(new SpriteComponent(flag));
-			entity.add(new TeamMaskComponent(flagMask, new Color(239f / 255f, 212f / 255f, 53f / 255f, 1f)));
-			entity.add(new PositionComponent(x + rx, 11 + ry));
-			entity.add(new MovementComponent(rs));
-			entity.add(new ShadowComponent(0.1f));
-
-			engine.addEntity(entity);
 		}
 	}
 
