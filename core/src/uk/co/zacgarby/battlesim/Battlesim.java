@@ -17,6 +17,8 @@ import uk.co.zacgarby.battlesim.components.*;
 import uk.co.zacgarby.battlesim.formations.Formation;
 import uk.co.zacgarby.battlesim.formations.RowsFormation;
 import uk.co.zacgarby.battlesim.physics.Circle;
+import uk.co.zacgarby.battlesim.physics.IntersectionResult;
+import uk.co.zacgarby.battlesim.physics.Shape;
 import uk.co.zacgarby.battlesim.systems.*;
 
 public class Battlesim extends ApplicationAdapter {
@@ -33,6 +35,11 @@ public class Battlesim extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+		Shape shape = new Circle(5);
+		Shape shape2 = new Circle(5);
+		IntersectionResult res = shape.intersect(new Vector2(0, 0), new Vector2(5, 0), shape2);
+		System.out.println(res.intersect + "; " + res.toEdge);
+
 		batch = new SpriteBatch();
 
 		engine = new Engine();
@@ -80,7 +87,7 @@ public class Battlesim extends ApplicationAdapter {
 				entity.add(new ShadowComponent(0.1f));
 
 				entity.add(new MovementComponent(rs));
-				entity.add(new CollisionComponent(new Circle(0.85f)));
+				entity.add(new CollisionComponent(new Circle(0.4f)));
 				entity.add(new PositionComponent(x + rx, y + ry));
 
 				entity.add(new GoalComponent(x + rx, y + ry, 0.1f));
@@ -103,7 +110,7 @@ public class Battlesim extends ApplicationAdapter {
 				entity.add(new ShadowComponent(0.1f));
 
 				entity.add(new PositionComponent(x + rx, y + ry));
-				entity.add(new CollisionComponent(new Circle(0.85f)));
+				entity.add(new CollisionComponent(new Circle(0.4f)));
 				entity.add(new MovementComponent(rs));
 
 				engine.addEntity(entity);
@@ -143,8 +150,9 @@ public class Battlesim extends ApplicationAdapter {
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 			camera.translate(0, camSpeed * dt, 0);
 		}
-
-		formation.setHeading(formation.getHeading() + 10f * dt);
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+			formation.setHeading(formation.getHeading() + 45f);
+		}
 
 		engine.update(dt);
 	}
